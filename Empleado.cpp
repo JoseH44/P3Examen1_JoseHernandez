@@ -52,6 +52,14 @@ void Empleado::setPorcentajePereza(int pPorcentajePereza){
 	porc_pereza = pPorcentajePereza;
 }
 
+Tarea* Empleado::getTarea(){
+	return tarea;
+}
+
+void Empleado::setTarea(Tarea* pTarea){
+	tarea = pTarea;
+}
+
 
 Empleado::~Empleado()
 {

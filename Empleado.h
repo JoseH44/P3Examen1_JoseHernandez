@@ -39,6 +39,9 @@ class Empleado
 		//setter y getter del porcentaje de pereza
 		int getPorcentajePereza();
 		void setPorcentajePereza(int);
+		//setter y getter de la tarea
+		Tarea* getTarea();
+		void setTarea(Tarea*);
 				
 		~Empleado();
 	
