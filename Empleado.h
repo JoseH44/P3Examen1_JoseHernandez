@@ -20,9 +20,10 @@ class Empleado
 		int nivel;
 		int porc_habilidad;
 		int porc_pereza;
+		int estado;
 	public:
 		Empleado();
-		Empleado(string,int,int,int,int);
+		Empleado(string,int,int,int,int,int);
 		
 		//setters y getters del nombre
 		string getNombre();
@@ -42,6 +43,9 @@ class Empleado
 		//setter y getter de la tarea
 		Tarea* getTarea();
 		void setTarea(Tarea*);
+		//setter y getter del estado
+		int getEstado();
+		void setEstado(int);
 				
 		~Empleado();
 	

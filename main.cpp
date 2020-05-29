@@ -31,11 +31,11 @@ int main(int argc, char** argv) {
 			case 1:{
 				string nombre;
 				int edad,nivel,porc_habilidad,porc_pereza;
-				int num_random1,num_random2;//numero random
+				/*int num_random1,num_random2;//numero random
 				
 				srand(time(NULL));
 				num_random1 = 0 + rand()% (101-1);
-				num_random2 = 0 + rand()% (101-1);
+				num_random2 = 0 + rand()% (101-1);*/
 				
 				cout<<endl<<"Ingrese el Nombre del Empleado:";
 				cin >> nombre;
@@ -43,16 +43,20 @@ int main(int argc, char** argv) {
 				cin >> edad;
 				cout<<endl<<"Ingrese el Nivel del Empleado de 1-3:";
 				cin >> nivel;
+				
 				while(nivel < 1 || nivel > 3){
 					cout<<endl<<"El nivel debe ser entre 1 y 3";
 					cout<<endl<<"Ingrese el Nivel del Empleado de 1-3:";
 					cin >> nivel;
 				}//validacion del nivel del empleado
-				porc_habilidad = num_random1;
-				porc_pereza = num_random2;
+				cout<<endl<<"Ingrese el Porcentaje de Habilidad del Empleado:";
+				cin>>porc_habilidad;
+				cout<<endl<<"Ingrese el Porcentaje de Pereza del Empleado:";
+				cin >> porc_pereza;
 				
-				//creacion del empleado
-				empleado = new Empleado(nombre,edad,nivel,porc_habilidad,porc_pereza);
+				
+				//creacion del empleado, con estado en 0 que representa que está desocupado
+				empleado = new Empleado(nombre,edad,nivel,porc_habilidad,porc_pereza,0);
 				//empleado añadido al vector
 				lista_empleados.push_back(empleado);
 				cout<<endl<<"Empleado Contratado Correctamente"<<endl;
@@ -111,7 +115,33 @@ int main(int argc, char** argv) {
 				}
 				break;
 			}
-			case 6:{
+			case 6:{//proyecto
+				int N = 0;
+				//acumula el valor de carga de todas las tareas
+				for(int i = 0;i < lista_tareas.size();i++){
+					N += lista_tareas[i]->getCarga_Tarea();
+				}
+				int dias_esperados;
+				//determina la cantidad de días necesarios para terminar el proyecto
+				dias_esperados = N+(N*0.20);
+				int subMenu = 0;
+				while(subMenu != 3){
+					cout<<endl<<"1.Siguiente Dia"<<endl<<"2.Generar Reporte"<<endl<<"3.Salir"<<endl<<"Escoja una Opcion:";
+					cin >> subMenu;
+					switch(subMenu){
+						case 1:{
+							break;
+						}
+						case 2:{
+							break;
+						}
+						case 3:{
+							cout<<"Ha Salido del Proyecto"<<endl;
+							break;
+						}
+					}//fin del switch dentro del proyecto
+				}//fin del while que está dentro del proyecto
+				
 				break;
 			}
 			case 7:{
