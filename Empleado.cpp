@@ -37,7 +37,7 @@ void Empleado::setNivel(int pNivel){
 }
 
 int Empleado::getPorcentajeHabilidad(){
-	return (porc_habilidad;)
+	return (porc_habilidad);
 }
 
 void Empleado::setPorcentajeHabilidad(int pPorcentajeHabilidad){

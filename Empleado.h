@@ -1,15 +1,20 @@
 #ifndef EMPLEADO_H
 #define EMPLEADO_H
 
+#include <string>
+using std::string;
+
 #include <iostream>
 using namespace std;
 
-#include <string>
-using std::string;
+
+
+#include "Tarea.h"
 
 class Empleado
 {
 	private:
+		Tarea* tarea = NULL;
 		string nombre;
 		int edad;
 		int nivel;
