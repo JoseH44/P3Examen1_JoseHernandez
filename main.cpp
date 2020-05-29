@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
 	int opcion = 0;
 	while(opcion != 7){
 		cout<<"*********************"<<endl<<"1.Contratar Empleado"<<endl<<"2.Despedir Empleado"<<endl<<"3.Listar Empleados"
-			<<endl<<"4.Crear Tarea"<<endl<<"5.Listar Tarea"<<endl<<"6.Iniciar Proyecto"<<"7.Salir"<<endl<<"Escoja una opcion:";
+			<<endl<<"4.Crear Tarea"<<endl<<"5.Listar Tarea"<<endl<<"6.Iniciar Proyecto"<<endl<<"7.Salir"<<endl<<"Escoja una opcion:";
 		cin >> opcion;
 		switch(opcion){
 			case 1:{
@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
 				
 				break;
 			}
-			case 2:{
+			case 2:{//despedir empleado
 				int indice;
 				cout<<endl<<"Ingrese el indice del Empleado a Despedir:";
 				cin >> indice;
@@ -69,6 +69,7 @@ int main(int argc, char** argv) {
 					cin >> indice;
 				}//while de validacion
 				lista_empleados.erase(lista_empleados.begin()+indice);
+				cout<<"Empleado Despedido Exitosamente"<<endl;
 				
 				break;
 			}
@@ -78,14 +79,15 @@ int main(int argc, char** argv) {
 					cout<<i<<"-"<<lista_empleados[i]->getNombre()<<endl;
 				}
 				break;
+				cout<<endl;
 			}
-			case 4:{
+			case 4:{//crear tarea
 				string descripcion;
 				int nivelT;
 				int carga_tarea;
 				cout<<endl<<"Ingrese La Descripcion de la tarea:";
 				cin >> descripcion;
-				cout<<endl<<"Ingrese El Nivel de la tarea:";
+				cout<<endl<<"Ingrese El Nivel de la tarea de 1-3:";
 				cin >> nivelT;
 				while(nivelT < 1 || nivelT > 3){
 					cout<<endl<<"El nivel debe ser entre 1 y 3";
@@ -99,10 +101,14 @@ int main(int argc, char** argv) {
 				tarea1 = new Tarea(descripcion,nivelT,carga_tarea);
 				//añadido al vector de tareas
 				lista_tareas.push_back(tarea1);
-				cout<<endl<<"Tarea Creada Exitosamente!";
+				cout<<endl<<"Tarea Creada Exitosamente!"<<endl;
 				break;
 			}
-			case 5:{
+			case 5:{//listar tareas
+				cout<<endl;
+				for(int i = 0;i < lista_tareas.size();i++){
+					cout<<i<<"-"<<lista_tareas[i]->getDescripcion()<<endl;
+				}
 				break;
 			}
 			case 6:{
