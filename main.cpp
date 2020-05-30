@@ -139,8 +139,8 @@ int main(int argc, char** argv) {
 							
 							//asignacion de tareas
 							for(int i = 0;i < lista_empleados.size();i++){//for de empleados
-								for(int j = 0;i < lista_tareas.size();i++){//for de tareas
-									if(lista_empleados[i]->getEstado() == 0 && (lista_empleados[i]->getNivel() <= lista_tareas[i]->getNivelT() )){//revisa si esta desocupado y si tiene el nivel requerido
+								for(int j = 0;j < lista_tareas.size();j++){//for de tareas
+									if(lista_empleados[i]->getEstado() == 0 && (lista_empleados[i]->getNivel() <= lista_tareas[j]->getNivelT() )){//revisa si esta desocupado y si tiene el nivel requerido
 										lista_empleados[i]->setTarea(lista_tareas[j]);//le asigna la tarea
 										lista_tareas.erase(lista_tareas.begin()+j);//elimina esa tarea del vector
 										lista_empleados[i]->setEstado(1);//cambia el estado del empleado
@@ -181,7 +181,7 @@ int main(int argc, char** argv) {
 							cout<<"Empleados Perezosos: "<<empleados_perezosos<<endl;
 							cout<<"Empleados que Fallaron: "<<empleados_fallidos<<endl;
 							cout<<"Empleados que Lograron el Dia: "<<empleados_lograron_dia<<endl;
-							
+							break;
 							
 						}
 						case 3:{
