@@ -31,11 +31,7 @@ int main(int argc, char** argv) {
 			case 1:{
 				string nombre;
 				int edad,nivel,porc_habilidad,porc_pereza;
-				/*int num_random1,num_random2;//numero random
 				
-				srand(time(NULL));
-				num_random1 = 0 + rand()% (101-1);
-				num_random2 = 0 + rand()% (101-1);*/
 				
 				cout<<endl<<"Ingrese el Nombre del Empleado:";
 				cin >> nombre;
@@ -117,6 +113,10 @@ int main(int argc, char** argv) {
 			}
 			case 6:{//proyecto
 				int N = 0;
+				int tareas_proceso = 0;
+				int empleados_perezosos = 0;
+				int empleados_fallidos = 0;
+				int empleados_lograron_dia = 0;
 				//acumula el valor de carga de todas las tareas
 				for(int i = 0;i < lista_tareas.size();i++){
 					N += lista_tareas[i]->getCarga_Tarea();
@@ -126,17 +126,67 @@ int main(int argc, char** argv) {
 				dias_esperados = N+(N*0.20);
 				int subMenu = 0;
 				while(subMenu != 3){
+					//imprime los días restantes
+					cout<<endl<<"Dias para terminar el Proyecto: "<<dias_esperados<<endl;
 					cout<<endl<<"1.Siguiente Dia"<<endl<<"2.Generar Reporte"<<endl<<"3.Salir"<<endl<<"Escoja una Opcion:";
 					cin >> subMenu;
 					switch(subMenu){
 						case 1:{
+							int pereza,habilidad;//numero random
+							srand(time(NULL));
+							pereza = 0 + rand()% (101-0);
+							habilidad = 0 + rand()% (101-0);
+							
+							//asignacion de tareas
+							for(int i = 0;i < lista_empleados.size();i++){//for de empleados
+								for(int j = 0;i < lista_tareas.size();i++){//for de tareas
+									if(lista_empleados[i]->getEstado() == 0 && (lista_empleados[i]->getNivel() <= lista_tareas[i]->getNivelT() )){//revisa si esta desocupado y si tiene el nivel requerido
+										lista_empleados[i]->setTarea(lista_tareas[j]);//le asigna la tarea
+										lista_tareas.erase(lista_tareas.begin()+j);//elimina esa tarea del vector
+										lista_empleados[i]->setEstado(1);//cambia el estado del empleado
+										tareas_proceso++;//agrega +1 a las tareas que se están ejecutando
+									}
+								}//fin del for de las tareas
+							}//fin del for de los empleados
+							dias_esperados--;
+							
+							for(int i = 0;i < lista_empleados.size();i++){
+								if(lista_empleados[i]->getEstado() == 1){//revisa si tiene una tarea en ejecucion
+									
+									if(lista_empleados[i]->getPorcentajePereza() < pereza){//revisa si la pereza del empleado es menor a la pereza general
+										
+										if(lista_empleados[i]->getPorcentajeHabilidad() > habilidad){//revisa si la habilidad del empleado es mayor a la requerida
+											empleados_lograron_dia++;//agrega +1 a los empleados que lograron al dia
+											int ref_carga = lista_empleados[i]->getTarea()->getCarga_Tarea();//guarda la carga de la tarea que tiene ese empleado
+											lista_empleados[i]->getTarea()->setCarga_Tarea(ref_carga-1);//le setea el valor de la carga menos 1
+											if(lista_empleados[i]->getTarea()->getCarga_Tarea() == 0){//si la carga de la tarea llega a 0 el empleado se desocupa
+												lista_empleados[i]->setEstado(0);
+											}
+										}else{
+											empleados_fallidos++;//empleado que no pudo realizar la tarea
+										}
+									}else{
+										empleados_perezosos++;
+									}
+								}
+							}
 							break;
+							
 						}
-						case 2:{
-							break;
+						case 2:{//reporte del día
+							cout<<endl;
+							int tareas_en_backlog = lista_tareas.size();
+							cout<<"Tareas en Blacklog: "<<tareas_en_backlog<<endl;
+							cout<<"Tareas en Progreso: "<<tareas_proceso<<endl;
+							cout<<"Empleados Perezosos: "<<empleados_perezosos<<endl;
+							cout<<"Empleados que Fallaron: "<<empleados_fallidos<<endl;
+							cout<<"Empleados que Lograron el Dia: "<<empleados_lograron_dia<<endl;
+							
+							
 						}
 						case 3:{
 							cout<<"Ha Salido del Proyecto"<<endl;
+							lista_tareas.erase(lista_tareas.begin());
 							break;
 						}
 					}//fin del switch dentro del proyecto
